@@ -5,7 +5,7 @@ Fluent Validator is a fluent way to use Notification Pattern with your entities
 1.0.2 - Now supports multiples frameworks (4.4.2+, .NET Standards 1.6)
 
 ### How To Use
-##### Inherit from Notifiable
+#### Inherit from Notifiable
 The Notifiable class contains the notification list as it's methods to add new notifications, get notifications and check if the entity is valid.
 
 * Notifications: Readonly colletion containing the entity's notifications
@@ -21,7 +21,7 @@ public class Customer : Notifiable
 }
 ```
 
-##### Create a Contract
+#### Create a Contract
 Some time ago, Microsoft created a Design By Contract lib, called Code Contracts. That was awesome idea, but did not implemented the Notification Pattern. Istead, it threw exceptions, which have a high cost to CPU.
 
 The contract idea is brilliant, as it make the code clean to read, avoid ifs, reducing the complexity, and allow us to reuse our validations.
@@ -44,7 +44,7 @@ public class Customer : Notifiable
 
 All you need to do is create a new ValidationContract of your class type when needed and start composing this contract.
 
-##### Validation Methods
+#### Validation Methods
 * IsRequired - Check if a string is required
 * HasMinLenght - Check the min length of a string
 * HasMaxLenght - Check the max length of a string
@@ -56,10 +56,10 @@ All you need to do is create a new ValidationContract of your class type when ne
 * IsBetween - Check if int, double, decimal or date are between some values
 * Contains - Check if a string contains some other
 
-##### Custom Messages
+#### Custom Messages
 When you call ".IsRequired(x => x.Name)" you're using the default messagens, which you can find on the code. If you need to pass a custom message, just set it as the last parameter as ".IsRequired(x => x.Name, "My custom message here!");"
 
-##### Showing the Notifications
+#### Showing the Notifications
 With all set, it's time to show the messages.
 ```
 public void Main(args[])
