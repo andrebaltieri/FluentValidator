@@ -5,6 +5,11 @@ Fluent Validator is a fluent way to use Notification Pattern with your entities
 1.0.2 - Now supports multiples frameworks (4.4.2+, .NET Standards 1.6)
 
 ### How To Use
+#### Install the NuGet Package
+```
+PM> Install-Package FluentValidator
+```
+
 #### Inherit from Notifiable
 The Notifiable class contains the notification list as it's methods to add new notifications, get notifications and check if the entity is valid.
 
