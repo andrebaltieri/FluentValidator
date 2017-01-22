@@ -4,32 +4,32 @@ using Validation;
 
 namespace Tests.ValidationContract
 {
-    public class IsLowerThanTests
+    public class IsBetweenTests
     {
         private readonly FakeEntity _fake;
 
-        public IsLowerThanTests()
+        public IsBetweenTests()
         {
             _fake = new FakeEntity();
         }
 
         #region Integer
         [Fact]
-        public void ShouldReturnNotificationWhenIntegerIsNotLowerThan()
+        public void ShouldReturnNotificationWhenIntegerIsNotBetween()
         {
-            _fake.SomeInteger = 5;
+            _fake.SomeInteger = 3;
             new ValidationContract<FakeEntity>(_fake)
-                .IsLowerThan(x => x.SomeInteger, 3);
+                .IsBetween(x => x.SomeInteger, 5, 7);
 
             Assert.True(_fake.Notifications.Count == 1);
         }
 
         [Fact]
-        public void ShouldNotReturnNotificationWhenIntegerIsLowerThan()
+        public void ShouldNotReturnNotificationWhenIntegerIsBetween()
         {
-            _fake.SomeInteger = 5;
+            _fake.SomeInteger = 3;
             new ValidationContract<FakeEntity>(_fake)
-                .IsLowerThan(x => x.SomeInteger, 7);
+                .IsBetween(x => x.SomeInteger, 2, 5);
 
             Assert.True(_fake.Notifications.Count == 0);
         }
@@ -37,21 +37,21 @@ namespace Tests.ValidationContract
 
         #region Decimal
         [Fact]
-        public void ShouldReturnNotificationWhenDecimalIsNotLowerThan()
+        public void ShouldReturnNotificationWhenDecimalIsNotBetween()
         {
-            _fake.SomeDecimal = 5;
+            _fake.SomeDecimal = 3;
             new ValidationContract<FakeEntity>(_fake)
-                .IsLowerThan(x => x.SomeDecimal, 3);
+                .IsBetween(x => x.SomeDecimal, 5, 7);
 
             Assert.True(_fake.Notifications.Count == 1);
         }
 
         [Fact]
-        public void ShouldNotReturnNotificationWhenDecimalIsLowerThan()
+        public void ShouldNotReturnNotificationWhenDecimalIsBetween()
         {
-            _fake.SomeDecimal = 5;
+            _fake.SomeDecimal = 3;
             new ValidationContract<FakeEntity>(_fake)
-                .IsLowerThan(x => x.SomeDecimal, 7);
+                .IsBetween(x => x.SomeDecimal, 2, 5);
 
             Assert.True(_fake.Notifications.Count == 0);
         }
@@ -59,21 +59,21 @@ namespace Tests.ValidationContract
 
         #region Double
         [Fact]
-        public void ShouldReturnNotificationWhenDoubleIsNotLowerThan()
+        public void ShouldReturnNotificationWhenDoubleIsNotBetween()
         {
-            _fake.SomeDouble = 5;
+            _fake.SomeDouble = 3;
             new ValidationContract<FakeEntity>(_fake)
-                .IsLowerThan(x => x.SomeDouble, 3);
+                .IsBetween(x => x.SomeDouble, 5, 7);
 
             Assert.True(_fake.Notifications.Count == 1);
         }
 
         [Fact]
-        public void ShouldNotReturnNotificationWhenDoubleIsLowerThan()
+        public void ShouldNotReturnNotificationWhenDoubleIsBetween()
         {
-            _fake.SomeDouble = 5;
+            _fake.SomeDouble = 3;
             new ValidationContract<FakeEntity>(_fake)
-                .IsLowerThan(x => x.SomeDouble, 7);
+                .IsBetween(x => x.SomeDouble, 2, 5);
 
             Assert.True(_fake.Notifications.Count == 0);
         }
@@ -81,21 +81,21 @@ namespace Tests.ValidationContract
 
         #region Date
         [Fact]
-        public void ShouldReturnNotificationWhenDateIsNotLowerThan()
+        public void ShouldReturnNotificationWhenDateIsNotBetween()
         {
             _fake.SomeDate = DateTime.Now;
             new ValidationContract<FakeEntity>(_fake)
-                .IsLowerThan(x => x.SomeDate, DateTime.Now.AddDays(-3));
+                .IsBetween(x => x.SomeDate, DateTime.Now.AddDays(5), DateTime.Now.AddDays(7));
 
             Assert.True(_fake.Notifications.Count == 1);
         }
 
         [Fact]
-        public void ShouldNotReturnNotificationWhenDateIsLowerThan()
+        public void ShouldNotReturnNotificationWhenDateIsBetween()
         {
-            _fake.SomeDate = DateTime.Now;
+            _fake.SomeDate = DateTime.Now;            
             new ValidationContract<FakeEntity>(_fake)
-                .IsLowerThan(x => x.SomeDate, DateTime.Now.AddDays(3));
+                .IsBetween(x => x.SomeDate, DateTime.Now.AddDays(-2), DateTime.Now.AddDays(3));
 
             Assert.True(_fake.Notifications.Count == 0);
         }

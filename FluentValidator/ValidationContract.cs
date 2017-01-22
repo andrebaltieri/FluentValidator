@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 
@@ -185,7 +185,7 @@ namespace Validation
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (val < date)
-                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be greater than {date.ToShortDateString()}." : message);
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be greater than {date.ToString("MM/dd/yyyy")}." : message);
 
             return this;
         }
@@ -257,7 +257,7 @@ namespace Validation
             var name = ((MemberExpression)selector.Body).Member.Name;
 
             if (val > date)
-                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be lower than {date.ToShortDateString()}." : message);
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be lower than {date.ToString("MM/dd/yyyy")}." : message);
 
             return this;
         }
@@ -280,7 +280,82 @@ namespace Validation
 
             return this;
         }
-        // Between - int, decimal, double, date
+
+        /// <summary>
+        /// Given a decimal, add a notification if it's not greater than some other value
+        /// </summary>
+        /// <param name="selector">Property</param>
+        /// <param name="a">Lower value</param>
+        /// <param name="b">Higher value</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> IsBetween(Expression<Func<T, decimal>> selector, decimal a, decimal b, string message = "")
+        {
+            var val = selector.Compile().Invoke(_validatable);
+            var name = ((MemberExpression)selector.Body).Member.Name;
+
+            if (val < a || val > b)
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be between {a} and {b}." : message);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Given a double, add a notification if it's not greater than some other value
+        /// </summary>
+        /// <param name="selector">Property</param>
+        /// <param name="a">Lower value</param>
+        /// <param name="b">Higher value</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> IsBetween(Expression<Func<T, double>> selector, double a, double b, string message = "")
+        {
+            var val = selector.Compile().Invoke(_validatable);
+            var name = ((MemberExpression)selector.Body).Member.Name;
+
+            if (val < a || val > b)
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be between {a} and {b}." : message);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Given a date, add a notification if it's not greater than some other value
+        /// </summary>
+        /// <param name="selector">Property</param>
+        /// <param name="a">Lower value</param>
+        /// <param name="b">Higher value</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> IsBetween(Expression<Func<T, DateTime>> selector, DateTime a, DateTime b, string message = "")
+        {
+            var val = selector.Compile().Invoke(_validatable);
+            var name = ((MemberExpression)selector.Body).Member.Name;
+
+            if (val < a || val > b)
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be between {a.ToString("MM/dd/yyyy")} and {b.ToString("MM/dd/yyyy")}." : message);
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Given a string, add a notification if it's not greater than some other value
+        /// </summary>
+        /// <param name="selector">Property</param>
+        /// <param name="a">Lower value</param>
+        /// <param name="b">Higher value</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> Contains(Expression<Func<T, string>> selector, string text, string message = "")
+        {
+            var val = selector.Compile().Invoke(_validatable);
+            var name = ((MemberExpression)selector.Body).Member.Name;
+
+            if (!val.Contains(text))
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be contains {text}." : message);
+
+            return this;
+        }
         // Contains - String
     }
 }

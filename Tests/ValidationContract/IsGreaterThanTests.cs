@@ -1,10 +1,9 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using Xunit;
 using Validation;
 
 namespace Tests.ValidationContract
 {
-    [TestClass]
     public class IsGreaterThanTests
     {
         private readonly FakeEntity _fake;
@@ -15,98 +14,90 @@ namespace Tests.ValidationContract
         }
 
         #region Integer
-        [TestMethod]
-        [TestCategory("IsGreaterThan - Integer")]
+        [Fact]
         public void ShouldReturnNotificationWhenIntegerIsNotGreaterThan()
         {
             _fake.SomeInteger = 3;
             new ValidationContract<FakeEntity>(_fake)
                 .IsGreaterThan(x => x.SomeInteger, 5);
 
-            Assert.AreEqual(1, _fake.Notifications.Count);
+            Assert.True(_fake.Notifications.Count == 1);
         }
 
-        [TestMethod]
-        [TestCategory("IsGreaterThan - Integer")]
+        [Fact]
         public void ShouldNotReturnNotificationWhenIntegerIsGreaterThan()
         {
             _fake.SomeInteger = 7;
             new ValidationContract<FakeEntity>(_fake)
                 .IsGreaterThan(x => x.SomeInteger, 5);
 
-            Assert.AreEqual(0, _fake.Notifications.Count);
+            Assert.True(_fake.Notifications.Count == 0);
         }
         #endregion
 
         #region Decimal
-        [TestMethod]
-        [TestCategory("IsGreaterThan - Decimal")]
+        [Fact]
         public void ShouldReturnNotificationWhenDecimalIsNotGreaterThan()
         {
             _fake.SomeDecimal = 3;
             new ValidationContract<FakeEntity>(_fake)
                 .IsGreaterThan(x => x.SomeDecimal, 5);
 
-            Assert.AreEqual(1, _fake.Notifications.Count);
+            Assert.True(_fake.Notifications.Count == 1);
         }
 
-        [TestMethod]
-        [TestCategory("IsGreaterThan - Decimal")]
+        [Fact]
         public void ShouldNotReturnNotificationWhenDecimalIsGreaterThan()
         {
             _fake.SomeDecimal = 7;
             new ValidationContract<FakeEntity>(_fake)
                 .IsGreaterThan(x => x.SomeDecimal, 5);
 
-            Assert.AreEqual(0, _fake.Notifications.Count);
+            Assert.True(_fake.Notifications.Count == 0);
         }
         #endregion
 
         #region Double
-        [TestMethod]
-        [TestCategory("IsGreaterThan - Double")]
+        [Fact]
         public void ShouldReturnNotificationWhenDoubleIsNotGreaterThan()
         {
             _fake.SomeDouble = 3;
             new ValidationContract<FakeEntity>(_fake)
                 .IsGreaterThan(x => x.SomeDouble, 5);
 
-            Assert.AreEqual(1, _fake.Notifications.Count);
+            Assert.True(_fake.Notifications.Count == 1);
         }
 
-        [TestMethod]
-        [TestCategory("IsGreaterThan - Double")]
+        [Fact]
         public void ShouldNotReturnNotificationWhenDoubleIsGreaterThan()
         {
             _fake.SomeDouble = 7;
             new ValidationContract<FakeEntity>(_fake)
                 .IsGreaterThan(x => x.SomeDouble, 5);
 
-            Assert.AreEqual(0, _fake.Notifications.Count);
+            Assert.True(_fake.Notifications.Count == 0);
         }
         #endregion
 
         #region Date
-        [TestMethod]
-        [TestCategory("IsGreaterThan - Date")]
+        [Fact]
         public void ShouldReturnNotificationWhenDateIsNotGreaterThan()
         {
             _fake.SomeDate = DateTime.Now;
             new ValidationContract<FakeEntity>(_fake)
                 .IsGreaterThan(x => x.SomeDate, DateTime.Now.AddDays(3));
 
-            Assert.AreEqual(1, _fake.Notifications.Count);
+            Assert.True(_fake.Notifications.Count == 1);
         }
 
-        [TestMethod]
-        [TestCategory("IsGreaterThan - Date")]
+        [Fact]
         public void ShouldNotReturnNotificationWhenDateIsGreaterThan()
         {
             _fake.SomeDate = DateTime.Now;
             new ValidationContract<FakeEntity>(_fake)
                 .IsGreaterThan(x => x.SomeDate, DateTime.Now.AddDays(-5));
 
-            Assert.AreEqual(0, _fake.Notifications.Count);
+            Assert.True(_fake.Notifications.Count == 0);
         }
         #endregion
     }

@@ -1,9 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Validation;
 
 namespace Tests.ValidationContract
 {
-    [TestClass]
     public class IsRequiredTests
     {
         private readonly FakeEntity _fake;
@@ -13,36 +12,33 @@ namespace Tests.ValidationContract
             _fake = new FakeEntity();
         }
 
-        [TestMethod]
-        [TestCategory("IsRequired - String")]
+        [Fact]
         public void ShouldReturnNotificationWhenNullString()
         {
             new ValidationContract<FakeEntity>(_fake)
                 .IsRequired(x => x.SomeString);
 
-            Assert.AreEqual(1, _fake.Notifications.Count);
+            Assert.True(_fake.Notifications.Count == 1);
         }
 
-        [TestMethod]
-        [TestCategory("IsRequired - String")]
+        [Fact]
         public void ShouldReturnNotificationWhenEmptyString()
         {
             _fake.SomeString = "";
             new ValidationContract<FakeEntity>(_fake)
                 .IsRequired(x => x.SomeString);
 
-            Assert.AreEqual(1, _fake.Notifications.Count);
+            Assert.True(_fake.Notifications.Count == 1);
         }
 
-        [TestMethod]
-        [TestCategory("IsRequired - String")]
+        [Fact]
         public void ShouldNotReturnNotificationWhenFilledString()
         {
             _fake.SomeString = "Some Name Here";
             new ValidationContract<FakeEntity>(_fake)
                 .IsRequired(x => x.SomeString);
 
-            Assert.AreEqual(0, _fake.Notifications.Count);
+            Assert.True(_fake.Notifications.Count == 0);
         }
     }
 }

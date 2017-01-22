@@ -1,9 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Validation;
 
 namespace Tests.ValidationContract
 {
-    [TestClass]
     public class IsUrlTests
     {
         private readonly FakeEntity _fake;
@@ -13,47 +12,43 @@ namespace Tests.ValidationContract
             _fake = new FakeEntity();
         }
 
-        [TestMethod]
-        [TestCategory("IsUrl - String")]
+        [Fact]
         public void ShouldNotReturnNotificationWhenNullString()
         {
             new ValidationContract<FakeEntity>(_fake)
                 .IsUrl(x => x.SomeString);
 
-            Assert.AreEqual(0, _fake.Notifications.Count);
+            Assert.True(_fake.Notifications.Count == 0);
         }
 
-        [TestMethod]
-        [TestCategory("IsUrl - String")]
+        [Fact]
         public void ShouldNotReturnNotificationWhenEmptyString()
         {
             _fake.SomeString = "";
             new ValidationContract<FakeEntity>(_fake)
                 .IsUrl(x => x.SomeString);
 
-            Assert.AreEqual(0, _fake.Notifications.Count);
+            Assert.True(_fake.Notifications.Count == 0);
         }
 
-        [TestMethod]
-        [TestCategory("IsUrl - String")]
+        [Fact]
         public void ShouldReturnNotificationWhenFilledString()
         {
             _fake.SomeString = "This is not an URL";
             new ValidationContract<FakeEntity>(_fake)
                 .IsUrl(x => x.SomeString);
 
-            Assert.AreEqual(1, _fake.Notifications.Count);
+            Assert.True(_fake.Notifications.Count == 1);
         }
 
-        [TestMethod]
-        [TestCategory("IsUrl - String")]
+        [Fact]
         public void ShouldNotReturnNotificationWhenStringIsValid()
         {
             _fake.SomeString = "http://andrebaltieri.net/";
             new ValidationContract<FakeEntity>(_fake)
                 .IsUrl(x => x.SomeString);
 
-            Assert.AreEqual(0, _fake.Notifications.Count);
+            Assert.True(_fake.Notifications.Count == 0);
         }
     }
 }

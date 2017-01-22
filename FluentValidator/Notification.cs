@@ -1,4 +1,4 @@
-﻿namespace Validation
+namespace Validation
 {
     public class Notification
     {
