@@ -1,37 +1,78 @@
-## Welcome to GitHub Pages
+# Fluent Validator
+Fluent Validator is a fluent way to use Notification Pattern with your entities
 
-You can use the [editor on GitHub](https://github.com/andrebaltieri/FluentValidator/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+### Current Version
+1.0.2 - Now supports multiples frameworks (4.4.2+, .NET Standards 1.6)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### How To Use
+##### Inherit from Notifiable
+The Notifiable class contains the notification list as it's methods to add new notifications, get notifications and check if the entity is valid.
 
-### Markdown
+* Notifications: Readonly colletion containing the entity's notifications
+* AddNotification: Used to add a new notification to the entity.
+* AddNotifications: Used to add multiple notifications to the entity.
+* IsValid: Return false if entity has notifications.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+Basically, you just need to inherit this class to start:
+```
+public class Customer : Notifiable
+{
+    ...
+}
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+##### Create a Contract
+Some time ago, Microsoft created a Design By Contract lib, called Code Contracts. That was awesome idea, but did not implemented the Notification Pattern. Istead, it threw exceptions, which have a high cost to CPU.
 
-### Jekyll Themes
+The contract idea is brilliant, as it make the code clean to read, avoid ifs, reducing the complexity, and allow us to reuse our validations.
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/andrebaltieri/FluentValidator/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+The idea here is the same, let's check.
+```
+public class Customer : Notifiable
+{
+    public Customer(string name) 
+    {
+        Name = name;
+        
+        new ValidationContract<Customer>(this)
+            .IsRequired(x => x.Name);
+    }
+    
+    public string Name { get; private set; }
+}
+```
 
-### Support or Contact
+All you need to do is create a new ValidationContract of your class type when needed and start composing this contract.
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+##### Validation Methods
+* IsRequired - Check if a string is required
+* HasMinLenght - Check the min length of a string
+* HasMaxLenght - Check the max length of a string
+* IsFixedLenght - Check if the string has a fixed length
+* IsEmail - Check if it is an E-mail
+* IsUrl - Check if it is a URL
+* IsGreaterThan - Check if int, double, decimal or date are greater than
+* IsLowerThan - Check if int, double, decimal or date are lower than
+* IsBetween - Check if int, double, decimal or date are between some values
+* Contains - Check if a string contains some other
+
+##### Custom Messages
+When you call ".IsRequired(x => x.Name)" you're using the default messagens, which you can find on the code. If you need to pass a custom message, just set it as the last parameter as ".IsRequired(x => x.Name, "My custom message here!");"
+
+##### Showing the Notifications
+With all set, it's time to show the messages.
+```
+public void Main(args[])
+{
+    var customer = new Customer("André");
+    
+    if(!customer.IsValid())
+    {
+        foreach(var notification in customer.Notifications)
+        {
+            Console.WriteLine(notification.Message);
+        }
+    }
+    Console.ReadKey();
+}
+```
