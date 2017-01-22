@@ -7,7 +7,7 @@
     "System.Runtime.Serialization.Primitives": "4.3.0",
     "xunit": "2.1.0",
     "dotnet-test-xunit": "1.0.0-rc2-192208-24",
-    "Validation":"1.0.0"
+    "FluentValidator":"1.0.1"
   },
   "testRunner": "xunit",
   "frameworks": {

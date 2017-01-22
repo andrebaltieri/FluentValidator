@@ -1,4 +1,4 @@
-namespace Validation
+namespace FluentValidator.Validation
 {
     public class Notification
     {

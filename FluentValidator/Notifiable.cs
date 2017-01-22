@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Validation
+namespace FluentValidator.Validation
 {
     public abstract class Notifiable
     {

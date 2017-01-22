@@ -1,16 +1,18 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.2",
   "authors": [
     "André Baltieri <andrebaltieri@gmail.com>"
   ],
-  "description": "Fluent Validator is a fluent way to use Notification Pattern with your entities.",  
+  "description": "Fluent Validator is a fluent way to use Notification Pattern with your entities.",
   "dependencies": {
     "NETStandard.Library": "1.6.0"
   },
   "frameworks": {
     "netstandard1.6": {
       "imports": "dnxcore50"
-    }
+    },
+    "net461": {},
+    "net452": {}
   },
   "buildOptions": {
     "outputName": "FluentValidator"

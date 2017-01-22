@@ -2,7 +2,7 @@ using System;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 
-namespace Validation
+namespace FluentValidator.Validation
 {
     public class ValidationContract<T> where T : Notifiable
     {
