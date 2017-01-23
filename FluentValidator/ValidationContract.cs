@@ -263,7 +263,7 @@ namespace FluentValidator.Validation
         }
 
         /// <summary>
-        /// Given an int, add a notification if it's not greater than some other value
+        /// Given an int, add a notification if it's not between some two values
         /// </summary>
         /// <param name="selector">Property</param>
         /// <param name="a">Lower value</param>
@@ -282,7 +282,7 @@ namespace FluentValidator.Validation
         }
 
         /// <summary>
-        /// Given a decimal, add a notification if it's not greater than some other value
+        /// Given a decimal, add a notification if it's not between some two values
         /// </summary>
         /// <param name="selector">Property</param>
         /// <param name="a">Lower value</param>
@@ -301,7 +301,7 @@ namespace FluentValidator.Validation
         }
 
         /// <summary>
-        /// Given a double, add a notification if it's not greater than some other value
+        /// Given a double, add a notification if it's not between some two values
         /// </summary>
         /// <param name="selector">Property</param>
         /// <param name="a">Lower value</param>
@@ -320,7 +320,7 @@ namespace FluentValidator.Validation
         }
 
         /// <summary>
-        /// Given a date, add a notification if it's not greater than some other value
+        /// Given a date, add a notification if it's not between some two values
         /// </summary>
         /// <param name="selector">Property</param>
         /// <param name="a">Lower value</param>
@@ -337,9 +337,9 @@ namespace FluentValidator.Validation
 
             return this;
         }
-        
+
         /// <summary>
-        /// Given a string, add a notification if it's not greater than some other value
+        /// Given a string, add a notification if it's not contains a text
         /// </summary>
         /// <param name="selector">Property</param>
         /// <param name="a">Lower value</param>
@@ -356,6 +356,283 @@ namespace FluentValidator.Validation
 
             return this;
         }
-        // Contains - String
+
+        /// <summary>
+        /// Given an object, add a notification if it's not null
+        /// </summary>
+        /// <param name="obj">Property</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> IsNull(object obj, string message)
+        {
+            if (obj != null)
+                _validatable.AddNotification("", message);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Given an object, add a notification if it's null
+        /// </summary>
+        /// <param name="obj">Property</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> IsNotNull(object obj, string message)
+        {
+            if (obj == null)
+                _validatable.AddNotification("", message);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Given a string, add a notification if it's not equals to other
+        /// </summary>
+        /// <param name="selector">Property</param>
+        /// <param name="val">Value to be compared</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> AreEquals(Expression<Func<T, string>> selector, string text, string message = "")
+        {
+            var val = selector.Compile().Invoke(_validatable);
+            var name = ((MemberExpression)selector.Body).Member.Name;
+
+            if (!val.Equals(text, StringComparison.OrdinalIgnoreCase))
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} should be equals to {text}." : message);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Given a string, add a notification if it's not equals to other
+        /// </summary>
+        /// <param name="selector">Property</param>
+        /// <param name="val">Value to be compared</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> AreEquals(Expression<Func<T, int>> selector, int val, string message = "")
+        {
+            var data = selector.Compile().Invoke(_validatable);
+            var name = ((MemberExpression)selector.Body).Member.Name;
+
+            if (data != val)
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} should be equals to {val}." : message);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Given a string, add a notification if it's not equals to other
+        /// </summary>
+        /// <param name="selector">Property</param>
+        /// <param name="val">Value to be compared</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> AreEquals(Expression<Func<T, decimal>> selector, decimal val, string message = "")
+        {
+            var data = selector.Compile().Invoke(_validatable);
+            var name = ((MemberExpression)selector.Body).Member.Name;
+
+            if (data != val)
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} should be equals to {val}." : message);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Given a string, add a notification if it's not equals to other
+        /// </summary>
+        /// <param name="selector">Property</param>
+        /// <param name="val">Value to be compared</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> AreEquals(Expression<Func<T, double>> selector, double val, string message = "")
+        {
+            var data = selector.Compile().Invoke(_validatable);
+            var name = ((MemberExpression)selector.Body).Member.Name;
+
+            if (data != val)
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} should be equals to {val}." : message);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Given a string, add a notification if it's not equals to other
+        /// </summary>
+        /// <param name="selector">Property</param>
+        /// <param name="val">Value to be compared</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> AreEquals(Expression<Func<T, bool>> selector, bool val, string message = "")
+        {
+            var data = selector.Compile().Invoke(_validatable);
+            var name = ((MemberExpression)selector.Body).Member.Name;
+
+            if (data != val)
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} should be equals to {val}." : message);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Given a string, add a notification if it's not equals to other
+        /// </summary>
+        /// <param name="selector">Property</param>
+        /// <param name="val">Value to be compared</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> AreEquals(Expression<Func<T, DateTime>> selector, DateTime val, string message = "")
+        {
+            var data = selector.Compile().Invoke(_validatable);
+            var name = ((MemberExpression)selector.Body).Member.Name;
+
+            if (data != val)
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} should be equals to {val.ToString("MM/dd/yyyy")}." : message);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Given a string, add a notification if it's equals to other
+        /// </summary>
+        /// <param name="selector">Property</param>
+        /// <param name="val">Value to be compared</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> AreNotEquals(Expression<Func<T, string>> selector, string text, string message = "")
+        {
+            var val = selector.Compile().Invoke(_validatable);
+            var name = ((MemberExpression)selector.Body).Member.Name;
+
+            if (val.Equals(text, StringComparison.OrdinalIgnoreCase))
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} should be equals to {text}." : message);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Given a string, add a notification if it's equals to other
+        /// </summary>
+        /// <param name="selector">Property</param>
+        /// <param name="val">Value to be compared</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> AreNotEquals(Expression<Func<T, int>> selector, int val, string message = "")
+        {
+            var data = selector.Compile().Invoke(_validatable);
+            var name = ((MemberExpression)selector.Body).Member.Name;
+
+            if (data == val)
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} should be equals to {val}." : message);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Given a string, add a notification if it's equals to other
+        /// </summary>
+        /// <param name="selector">Property</param>
+        /// <param name="val">Value to be compared</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> AreNotEquals(Expression<Func<T, decimal>> selector, decimal val, string message = "")
+        {
+            var data = selector.Compile().Invoke(_validatable);
+            var name = ((MemberExpression)selector.Body).Member.Name;
+
+            if (data == val)
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} should be equals to {val}." : message);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Given a string, add a notification if it's equals to other
+        /// </summary>
+        /// <param name="selector">Property</param>
+        /// <param name="val">Value to be compared</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> AreNotEquals(Expression<Func<T, double>> selector, double val, string message = "")
+        {
+            var data = selector.Compile().Invoke(_validatable);
+            var name = ((MemberExpression)selector.Body).Member.Name;
+
+            if (data == val)
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} should be equals to {val}." : message);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Given a string, add a notification if it's equals to other
+        /// </summary>
+        /// <param name="selector">Property</param>
+        /// <param name="val">Value to be compared</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> AreNotEquals(Expression<Func<T, bool>> selector, bool val, string message = "")
+        {
+            var data = selector.Compile().Invoke(_validatable);
+            var name = ((MemberExpression)selector.Body).Member.Name;
+
+            if (data == val)
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} should be equals to {val}." : message);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Given a string, add a notification if it's equals to other
+        /// </summary>
+        /// <param name="selector">Property</param>
+        /// <param name="val">Value to be compared</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> AreNotEquals(Expression<Func<T, DateTime>> selector, DateTime val, string message = "")
+        {
+            var data = selector.Compile().Invoke(_validatable);
+            var name = ((MemberExpression)selector.Body).Member.Name;
+
+            if (data == val)
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} should be equals to {val.ToString("MM/dd/yyyy")}." : message);
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Given a string, add a notification if it's not true
+        /// </summary>
+        /// <param name="selector">Property</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> IsTrue(Expression<Func<T, bool>> selector, string message = "")
+        {
+            var data = selector.Compile().Invoke(_validatable);
+            var name = ((MemberExpression)selector.Body).Member.Name;
+
+            if (data == false)
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} should be true." : message);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Given a string, add a notification if it's not false
+        /// </summary>
+        /// <param name="selector">Property</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> IsFalse(Expression<Func<T, bool>> selector, string message = "")
+        {
+            var data = selector.Compile().Invoke(_validatable);
+            var name = ((MemberExpression)selector.Body).Member.Name;
+
+            if (data == true)
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} should be false." : message);
+
+            return this;
+        }
     }
 }

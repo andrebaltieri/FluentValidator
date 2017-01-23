@@ -1,5 +1,5 @@
 using Xunit;
-using Validation;
+using FluentValidator.Validation;
 
 namespace Tests.ValidationContract
 {

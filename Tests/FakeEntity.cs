@@ -1,5 +1,5 @@
 using System;
-using Validation;
+using FluentValidator.Validation;
 
 namespace Tests
 {

@@ -1,33 +1,33 @@
 using Xunit;
-using Validation;
+using FluentValidator.Validation;
 
 namespace Tests.ValidationContract
 {
-    public class ContainsTests
+    public class IsNotNullTests
     {
         private readonly FakeEntity _fake;
 
-        public ContainsTests()
+        public IsNotNullTests()
         {
             _fake = new FakeEntity();
         }
-
+        
         [Fact]
-        public void ShouldNotReturnNotificationWhenContainsText()
+        public void ShouldNotReturnNotificationWhenIsNotNull()
         {
             _fake.SomeString = "André Luis Alves Baltieri";
             new ValidationContract<FakeEntity>(_fake)
-                .Contains(x => x.SomeString, "Luis");
+                .IsNotNull(1234, "This object should not be null");
 
             Assert.True(_fake.Notifications.Count == 0);
         }
 
         [Fact]
-        public void ShouldReturnNotificationWhenNotContainsText()
+        public void ShouldReturnNotificationWhenIsNull()
         {
             _fake.SomeString = "André Luis Alves Baltieri";
             new ValidationContract<FakeEntity>(_fake)
-                .Contains(x => x.SomeString, "NOTINTEXT");
+                .IsNotNull(null, "This object should not be null");
 
             Assert.True(_fake.Notifications.Count == 1);
         }
