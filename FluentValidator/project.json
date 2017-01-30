@@ -9,10 +9,21 @@
   },
   "frameworks": {
     "netstandard1.6": {
-      "imports": "dnxcore50"
+      "imports": "dnxcore50",
+      "dependencies": {
+        "NETStandard.Library": "1.6.0"
+      }
     },
-    "net461": {},
-    "net452": {}
+    "net461": {
+      "frameworkAssemblies": {
+        "System": ""
+      }
+    },
+    "net452": {
+      "frameworkAssemblies": {
+        "System": ""
+      }
+    }
   },
   "buildOptions": {
     "outputName": "FluentValidator"

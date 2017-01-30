@@ -7,10 +7,20 @@
     "System.Runtime.Serialization.Primitives": "4.3.0",
     "xunit": "2.1.0",
     "dotnet-test-xunit": "1.0.0-rc2-192208-24",
-    "FluentValidator":"1.0.1"
+    "FluentValidator": "1.0.1"
   },
   "testRunner": "xunit",
   "frameworks": {
+    "net461": {
+      "frameworkAssemblies": {
+        "System": ""
+      }
+    },
+    "net452": {
+      "frameworkAssemblies": {
+        "System": ""
+      }
+    },
     "netcoreapp1.1": {
       "dependencies": {
         "Microsoft.NETCore.App": {
