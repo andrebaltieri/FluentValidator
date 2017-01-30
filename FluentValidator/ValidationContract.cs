@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 
-namespace FluentValidator.Validation
+namespace FluentValidator
 {
     public class ValidationContract<T> where T : Notifiable
     {
@@ -600,7 +600,7 @@ namespace FluentValidator.Validation
 
             return this;
         }
-        
+
         /// <summary>
         /// Given a string, add a notification if it's not true
         /// </summary>
