@@ -335,7 +335,7 @@ namespace FluentValidator
         }
 
         /// <summary>
-        /// Given an int, add a notification if it's not lower than some other value
+        /// Given an int, add a notification if it's not lower than or equal some other value
         /// </summary>
         /// <param name="selector">Property</param>
         /// <param name="number">Number to be compared</param>
