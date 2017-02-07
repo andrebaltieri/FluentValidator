@@ -251,7 +251,7 @@ namespace FluentValidator
         /// <param name="date">Date to be compared</param>
         /// <param name="message">Error Message (Optional)</param>
         /// <returns></returns>
-        public ValidationContract<T> IsGreaterThan(Expression<Func<T, DateTime>> selector, DateTime date, string message = "")
+        public ValidationContract<T> IsGreaterThanOrEqual(Expression<Func<T, DateTime>> selector, DateTime date, string message = "")
         {
             var val = selector.Compile().Invoke(_validatable);
             var name = ((MemberExpression)selector.Body).Member.Name;
