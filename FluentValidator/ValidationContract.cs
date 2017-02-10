@@ -130,7 +130,7 @@ namespace FluentValidator
             var val = selector.Compile().Invoke(_validatable);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
-            if (val < number)
+            if (number >= val)
                 _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be greater than {number}." : message);
 
             return this;
@@ -148,7 +148,7 @@ namespace FluentValidator
             var val = selector.Compile().Invoke(_validatable);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
-            if (val < number)
+            if (number >= val)
                 _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be greater than {number}." : message);
 
             return this;
@@ -166,7 +166,7 @@ namespace FluentValidator
             var val = selector.Compile().Invoke(_validatable);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
-            if (val < number)
+            if (number >= val)
                 _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be greater than {number}." : message);
 
             return this;
@@ -184,7 +184,7 @@ namespace FluentValidator
             var val = selector.Compile().Invoke(_validatable);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
-            if (val < date)
+            if (date >= val)
                 _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be greater than {date.ToString("MM/dd/yyyy")}." : message);
 
             return this;
@@ -202,7 +202,7 @@ namespace FluentValidator
             var val = selector.Compile().Invoke(_validatable);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
-            if (val <= number)
+            if (val < number)
                 _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be greater than or equal {number}." : message);
 
             return this;
@@ -220,7 +220,7 @@ namespace FluentValidator
             var val = selector.Compile().Invoke(_validatable);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
-            if (val <= number)
+            if (val < number)
                 _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be greater than or equal {number}." : message);
 
             return this;
@@ -238,7 +238,7 @@ namespace FluentValidator
             var val = selector.Compile().Invoke(_validatable);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
-            if (val <= number)
+            if (val < number)
                 _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be greater than or equal {number}." : message);
 
             return this;
@@ -256,7 +256,7 @@ namespace FluentValidator
             var val = selector.Compile().Invoke(_validatable);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
-            if (val <= date)
+            if (val < date)
                 _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be greater than or equal {date.ToString("MM/dd/yyyy")}." : message);
 
             return this;
@@ -274,7 +274,7 @@ namespace FluentValidator
             var val = selector.Compile().Invoke(_validatable);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
-            if (val > number)
+            if (val >= number)
                 _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be lower than {number}." : message);
 
             return this;
@@ -292,7 +292,7 @@ namespace FluentValidator
             var val = selector.Compile().Invoke(_validatable);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
-            if (val > number)
+            if (val >= number)
                 _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be lower than {number}." : message);
 
             return this;
@@ -310,7 +310,7 @@ namespace FluentValidator
             var val = selector.Compile().Invoke(_validatable);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
-            if (val > number)
+            if (val >= number)
                 _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be lower than {number}." : message);
 
             return this;
@@ -328,7 +328,7 @@ namespace FluentValidator
             var val = selector.Compile().Invoke(_validatable);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
-            if (val > date)
+            if (val >= date)
                 _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be lower than {date.ToString("MM/dd/yyyy")}." : message);
 
             return this;
@@ -346,7 +346,7 @@ namespace FluentValidator
             var val = selector.Compile().Invoke(_validatable);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
-            if (val >= number)
+            if (val > number)
                 _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be lower than or equal {number}." : message);
 
             return this;
@@ -364,7 +364,7 @@ namespace FluentValidator
             var val = selector.Compile().Invoke(_validatable);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
-            if (val >= number)
+            if (val > number)
                 _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be lower than or equal {number}." : message);
 
             return this;
@@ -382,7 +382,7 @@ namespace FluentValidator
             var val = selector.Compile().Invoke(_validatable);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
-            if (val >= number)
+            if (val > number)
                 _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be lower than or equal {number}." : message);
 
             return this;
@@ -400,7 +400,7 @@ namespace FluentValidator
             var val = selector.Compile().Invoke(_validatable);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
-            if (val >= date)
+            if (val > date)
                 _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be lower than or equal {date.ToString("MM/dd/yyyy")}." : message);
 
             return this;
