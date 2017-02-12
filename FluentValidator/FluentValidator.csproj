@@ -43,6 +43,7 @@
     <Compile Include="Notifiable.cs" />
     <Compile Include="Notification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyResolver.cs" />
     <Compile Include="ValidationContract.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
