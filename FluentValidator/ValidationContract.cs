@@ -130,7 +130,7 @@ namespace FluentValidator
             var val = selector.Compile().Invoke(_validatable);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
-            if (val < number)
+            if (number >= val)
                 _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be greater than {number}." : message);
 
             return this;
@@ -148,7 +148,7 @@ namespace FluentValidator
             var val = selector.Compile().Invoke(_validatable);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
-            if (val < number)
+            if (number >= val)
                 _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be greater than {number}." : message);
 
             return this;
@@ -166,7 +166,7 @@ namespace FluentValidator
             var val = selector.Compile().Invoke(_validatable);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
-            if (val < number)
+            if (number >= val)
                 _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be greater than {number}." : message);
 
             return this;
@@ -184,8 +184,80 @@ namespace FluentValidator
             var val = selector.Compile().Invoke(_validatable);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
-            if (val < date)
+            if (date >= val)
                 _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be greater than {date.ToString("MM/dd/yyyy")}." : message);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Given an int, add a notification if it's not greater than or equal some other value
+        /// </summary>
+        /// <param name="selector">Property</param>
+        /// <param name="number">Number to be compared</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> IsGreaterThanOrEqual(Expression<Func<T, int>> selector, int number, string message = "")
+        {
+            var val = selector.Compile().Invoke(_validatable);
+            var name = ((MemberExpression)selector.Body).Member.Name;
+
+            if (val < number)
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be greater than or equal {number}." : message);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Given an decimal, add a notification if it's not greater than or equal some other value
+        /// </summary>
+        /// <param name="selector">Property</param>
+        /// <param name="number">Number to be compared</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> IsGreaterThanOrEqual(Expression<Func<T, decimal>> selector, decimal number, string message = "")
+        {
+            var val = selector.Compile().Invoke(_validatable);
+            var name = ((MemberExpression)selector.Body).Member.Name;
+
+            if (val < number)
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be greater than or equal {number}." : message);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Given an double, add a notification if it's not greater than or equal some other value
+        /// </summary>
+        /// <param name="selector">Property</param>
+        /// <param name="number">Number to be compared</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> IsGreaterThanOrEqual(Expression<Func<T, double>> selector, double number, string message = "")
+        {
+            var val = selector.Compile().Invoke(_validatable);
+            var name = ((MemberExpression)selector.Body).Member.Name;
+
+            if (val < number)
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be greater than or equal {number}." : message);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Given a Date, add a notification if it's not greater than or equal some other date
+        /// </summary>
+        /// <param name="selector">Property</param>
+        /// <param name="date">Date to be compared</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> IsGreaterThanOrEqual(Expression<Func<T, DateTime>> selector, DateTime date, string message = "")
+        {
+            var val = selector.Compile().Invoke(_validatable);
+            var name = ((MemberExpression)selector.Body).Member.Name;
+
+            if (val < date)
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be greater than or equal {date.ToString("MM/dd/yyyy")}." : message);
 
             return this;
         }
@@ -202,7 +274,7 @@ namespace FluentValidator
             var val = selector.Compile().Invoke(_validatable);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
-            if (val > number)
+            if (val >= number)
                 _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be lower than {number}." : message);
 
             return this;
@@ -220,7 +292,7 @@ namespace FluentValidator
             var val = selector.Compile().Invoke(_validatable);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
-            if (val > number)
+            if (val >= number)
                 _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be lower than {number}." : message);
 
             return this;
@@ -238,7 +310,7 @@ namespace FluentValidator
             var val = selector.Compile().Invoke(_validatable);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
-            if (val > number)
+            if (val >= number)
                 _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be lower than {number}." : message);
 
             return this;
@@ -256,8 +328,80 @@ namespace FluentValidator
             var val = selector.Compile().Invoke(_validatable);
             var name = ((MemberExpression)selector.Body).Member.Name;
 
-            if (val > date)
+            if (val >= date)
                 _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be lower than {date.ToString("MM/dd/yyyy")}." : message);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Given an int, add a notification if it's not lower than or equal some other value
+        /// </summary>
+        /// <param name="selector">Property</param>
+        /// <param name="number">Number to be compared</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> IsLowerThanOrEqual(Expression<Func<T, int>> selector, int number, string message = "")
+        {
+            var val = selector.Compile().Invoke(_validatable);
+            var name = ((MemberExpression)selector.Body).Member.Name;
+
+            if (val > number)
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be lower than or equal {number}." : message);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Given an decimal, add a notification if it's not lower than or equal some other value
+        /// </summary>
+        /// <param name="selector">Property</param>
+        /// <param name="number">Number to be compared</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> IsLowerThanOrEqual(Expression<Func<T, decimal>> selector, decimal number, string message = "")
+        {
+            var val = selector.Compile().Invoke(_validatable);
+            var name = ((MemberExpression)selector.Body).Member.Name;
+
+            if (val > number)
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be lower than or equal {number}." : message);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Given an double, add a notification if it's not lower than or equal some other value
+        /// </summary>
+        /// <param name="selector">Property</param>
+        /// <param name="number">Number to be compared</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> IsLowerThanOrEqual(Expression<Func<T, double>> selector, double number, string message = "")
+        {
+            var val = selector.Compile().Invoke(_validatable);
+            var name = ((MemberExpression)selector.Body).Member.Name;
+
+            if (val > number)
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be lower than or equal {number}." : message);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Given a Date, add a notification if it's not lower than or equal some other date
+        /// </summary>
+        /// <param name="selector">Property</param>
+        /// <param name="date">Date to be compared</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> IsLowerThanOrEqual(Expression<Func<T, DateTime>> selector, DateTime date, string message = "")
+        {
+            var val = selector.Compile().Invoke(_validatable);
+            var name = ((MemberExpression)selector.Body).Member.Name;
+
+            if (val > date)
+                _validatable.AddNotification(name, string.IsNullOrEmpty(message) ? $"Field {name} must be lower than or equal {date.ToString("MM/dd/yyyy")}." : message);
 
             return this;
         }
