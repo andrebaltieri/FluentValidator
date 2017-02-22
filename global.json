@@ -1,0 +1,6 @@
+{
+    "projects": [
+        "FluentValidator",
+        "FluentValidator.Tests"
+    ]
+}
