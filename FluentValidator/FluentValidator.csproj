@@ -1,12 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <VersionPrefix>1.0.6</VersionPrefix>
-    <TargetFramework>netstandard1.6</TargetFramework>
-    <AssemblyName>FluentValidator</AssemblyName>
-    <PackageId>FluentValidator</PackageId>
-    <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
-    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
+    <TargetFramework>netstandard1.4</TargetFramework>
   </PropertyGroup>
 
 </Project>

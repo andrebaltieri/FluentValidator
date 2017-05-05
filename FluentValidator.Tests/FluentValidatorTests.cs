@@ -1,56 +1,57 @@
-using Xunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FluentValidator.Tests
 {
+    [TestClass]
     public class FluentValidatorTests
     {
         private readonly Customer _customer = new Customer();
 
-        [Fact]
+        [TestMethod]
         public void IsRequired()
         {
             new ValidationContract<Customer>(_customer).IsRequired(x => x.Name);
-            Assert.Equal(false, _customer.IsValid());
+            Assert.AreEqual(false, _customer.IsValid());
         }
 
-        [Fact]
+        [TestMethod]
         public void HasMinLength()
         {
             _customer.Name = "A";
             new ValidationContract<Customer>(_customer).HasMinLenght(x => x.Name, 10);
-            Assert.Equal(false, _customer.IsValid());
+            Assert.AreEqual(false, _customer.IsValid());
         }
 
-        [Fact]
+        [TestMethod]
         public void HasMaxLength()
         {
             _customer.Name = "André Baltieri";
             new ValidationContract<Customer>(_customer).HasMaxLenght(x => x.Name, 1);
-            Assert.Equal(false, _customer.IsValid());
+            Assert.AreEqual(false, _customer.IsValid());
         }
 
-        [Fact]
+        [TestMethod]
         public void IsFixedLenght()
         {
             _customer.Name = "André Baltieri";
             new ValidationContract<Customer>(_customer).IsFixedLenght(x => x.Name, 5);
-            Assert.Equal(false, _customer.IsValid());
+            Assert.AreEqual(false, _customer.IsValid());
         }
 
-        [Fact]
+        [TestMethod]
         public void IsEmail()
         {
             _customer.Name = "This is not an e-mail";
             new ValidationContract<Customer>(_customer).IsEmail(x => x.Name);
-            Assert.Equal(false, _customer.IsValid());
+            Assert.AreEqual(false, _customer.IsValid());
         }
 
-        [Fact]
+        [TestMethod]
         public void IsUrl()
         {
             _customer.Name = "This is not an URL";
             new ValidationContract<Customer>(_customer).IsUrl(x => x.Name);
-            Assert.Equal(false, _customer.IsValid());
+            Assert.AreEqual(false, _customer.IsValid());
         }
     }
 
