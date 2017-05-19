@@ -530,6 +530,37 @@ namespace FluentValidator
         }
 
         /// <summary>
+        /// Given an string, add a notification if it's Empty
+        /// </summary>
+        /// <param name="str">Property</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> IsNotEmpty(string str, string message)
+        {
+            if (str == "")
+                _validatable.AddNotification("", message);
+
+            return this;
+        }
+
+
+        /// <summary>
+        /// Given an string, add a notification if it's Null or Empty
+        /// </summary>
+        /// <param name="str">Property</param>
+        /// <param name="message">Error Message (Optional)</param>
+        /// <returns></returns>
+        public ValidationContract<T> IsNotNullOrEmpty(string str, string message)
+        {
+            if (String.IsNullOrEmpty(str))
+                _validatable.AddNotification("", message);
+
+            return this;
+        }
+
+
+
+        /// <summary>
         /// Given a string, add a notification if it's not equals to other
         /// </summary>
         /// <param name="selector">Property</param>
