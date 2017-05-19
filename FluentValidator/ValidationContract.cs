@@ -550,7 +550,7 @@ namespace FluentValidator
         /// <param name="str">Property</param>
         /// <param name="message">Error Message (Optional)</param>
         /// <returns></returns>
-        public ValidationContract<T> IsNullOrEmpty(string str, string message)
+        public ValidationContract<T> IsNotNullOrEmpty(string str, string message)
         {
             if (String.IsNullOrEmpty(str))
                 _validatable.AddNotification("", message);
