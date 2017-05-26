@@ -1,7 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netstandard1.4</TargetFramework>
+    <AssemblyName>FluentValidator.Core</AssemblyName>
+    <PackageId>FluentValidator.Core</PackageId>
+    <Version>1.0.1</Version>
+    <Authors>André Baltieri, Milton Câmara</Authors>
+    <Company>balta.io</Company>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <AssemblyTitle>Fluent Validator</AssemblyTitle>
+    <Description>Fluent Validator is a fluent way to use Notification Pattern with your entities</Description>
   </PropertyGroup>
 
 </Project>

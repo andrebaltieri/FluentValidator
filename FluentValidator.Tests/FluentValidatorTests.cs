@@ -85,20 +85,20 @@ namespace FluentValidator.Tests
             _customer = new Customer();
             _customer.Age = 19;
             _customer.Height = 1.66;
-            _customer.Birthdate = Convert.ToDateTime("26/11/1987");
+            _customer.Birthdate = DateTime.Now.AddYears(-29);
 
             new ValidationContract<Customer>(_customer).IsGreaterThan(x => x.Age, 18);
             new ValidationContract<Customer>(_customer).IsGreaterThan(x => x.Height, 1.65);
-            new ValidationContract<Customer>(_customer).IsGreaterThan(x => x.Birthdate, Convert.ToDateTime("26/11/1986"));
+            new ValidationContract<Customer>(_customer).IsGreaterThan(x => x.Birthdate, DateTime.Now.AddYears(-30));
             Assert.AreEqual(true, _customer.IsValid());
 
             _customer = new Customer();
             _customer.Age = 17;
             _customer.Height = 1.66;
-            _customer.Birthdate = Convert.ToDateTime("26/11/1987");
+            _customer.Birthdate = DateTime.Now.AddYears(-29);
             new ValidationContract<Customer>(_customer).IsGreaterThan(x => x.Age, 18);
             new ValidationContract<Customer>(_customer).IsGreaterThan(x => x.Height, 1.66);
-            new ValidationContract<Customer>(_customer).IsGreaterThan(x => x.Birthdate, Convert.ToDateTime("26/11/1986"));
+            new ValidationContract<Customer>(_customer).IsGreaterThan(x => x.Birthdate, DateTime.Now.AddYears(-30));
             Assert.AreEqual(false, _customer.IsValid());
         }
 
@@ -108,28 +108,28 @@ namespace FluentValidator.Tests
             _customer = new Customer();
             _customer.Age = 18;
             _customer.Height = 1.66;
-            _customer.Birthdate = Convert.ToDateTime("26/11/1987");
+            _customer.Birthdate = DateTime.Now.AddYears(-29);
             new ValidationContract<Customer>(_customer).IsGreaterOrEqualsThan(x => x.Age, 18);
             new ValidationContract<Customer>(_customer).IsGreaterOrEqualsThan(x => x.Height, 1.66);
-            new ValidationContract<Customer>(_customer).IsGreaterOrEqualsThan(x => x.Birthdate, Convert.ToDateTime("26/11/1987"));
+            new ValidationContract<Customer>(_customer).IsGreaterOrEqualsThan(x => x.Birthdate, DateTime.Now.AddYears(-29));
             Assert.AreEqual(true, _customer.IsValid());
             
             _customer = new Customer();
             _customer.Age = 19;
             _customer.Height = 1.67;
-            _customer.Birthdate = Convert.ToDateTime("26/11/1987");
+            _customer.Birthdate = DateTime.Now.AddYears(-29);
             new ValidationContract<Customer>(_customer).IsGreaterOrEqualsThan(x => x.Age, 18);
             new ValidationContract<Customer>(_customer).IsGreaterOrEqualsThan(x => x.Height, 1.66);
-            new ValidationContract<Customer>(_customer).IsGreaterOrEqualsThan(x => x.Birthdate, Convert.ToDateTime("26/11/1986"));
+            new ValidationContract<Customer>(_customer).IsGreaterOrEqualsThan(x => x.Birthdate, DateTime.Now.AddYears(-30));
             Assert.AreEqual(true, _customer.IsValid());
 
             _customer = new Customer();
             _customer.Age = 17;
             _customer.Height = 1.65;
-            _customer.Birthdate = Convert.ToDateTime("26/11/1987");
+            _customer.Birthdate = DateTime.Now.AddYears(-29);
             new ValidationContract<Customer>(_customer).IsGreaterOrEqualsThan(x => x.Age, 18);
             new ValidationContract<Customer>(_customer).IsGreaterOrEqualsThan(x => x.Height, 1.66);
-            new ValidationContract<Customer>(_customer).IsGreaterOrEqualsThan(x => x.Birthdate, Convert.ToDateTime("26/11/1988"));
+            new ValidationContract<Customer>(_customer).IsGreaterOrEqualsThan(x => x.Birthdate, DateTime.Now.AddYears(-28));
             Assert.AreEqual(false, _customer.IsValid());
         }
 
@@ -139,11 +139,11 @@ namespace FluentValidator.Tests
             _customer = new Customer();
             _customer.Age = 19;
             _customer.Height = 1.66;
-            _customer.Birthdate = Convert.ToDateTime("26/11/1987");
+            _customer.Birthdate = DateTime.Now.AddYears(-29);
 
             new ValidationContract<Customer>(_customer).IsLowerThan(x => x.Age, 18);
             new ValidationContract<Customer>(_customer).IsLowerThan(x => x.Height, 1.65);
-            new ValidationContract<Customer>(_customer).IsLowerThan(x => x.Birthdate, Convert.ToDateTime("26/11/1986"));
+            new ValidationContract<Customer>(_customer).IsLowerThan(x => x.Birthdate, DateTime.Now.AddYears(-30));
             Assert.AreEqual(false, _customer.IsValid());
 
             _customer = new Customer();
@@ -152,7 +152,7 @@ namespace FluentValidator.Tests
             _customer.Birthdate = Convert.ToDateTime("26/11/1985");
             new ValidationContract<Customer>(_customer).IsLowerThan(x => x.Age, 18);
             new ValidationContract<Customer>(_customer).IsLowerThan(x => x.Height, 1.66);
-            new ValidationContract<Customer>(_customer).IsLowerThan(x => x.Birthdate, Convert.ToDateTime("26/11/1986"));
+            new ValidationContract<Customer>(_customer).IsLowerThan(x => x.Birthdate, DateTime.Now.AddYears(-30));
             Assert.AreEqual(true, _customer.IsValid());
         }
 
@@ -162,28 +162,28 @@ namespace FluentValidator.Tests
             _customer = new Customer();
             _customer.Age = 18;
             _customer.Height = 1.66;
-            _customer.Birthdate = Convert.ToDateTime("26/11/1987");
+            _customer.Birthdate = DateTime.Now.AddYears(-29);
             new ValidationContract<Customer>(_customer).IsLowerOrEqualsThan(x => x.Age, 18);
             new ValidationContract<Customer>(_customer).IsLowerOrEqualsThan(x => x.Height, 1.66);
-            new ValidationContract<Customer>(_customer).IsLowerOrEqualsThan(x => x.Birthdate, Convert.ToDateTime("26/11/1987"));
+            new ValidationContract<Customer>(_customer).IsLowerOrEqualsThan(x => x.Birthdate, DateTime.Now.AddYears(-29));
             Assert.AreEqual(true, _customer.IsValid());
             
             _customer = new Customer();
             _customer.Age = 19;
             _customer.Height = 1.67;
-            _customer.Birthdate = Convert.ToDateTime("26/11/1987");
+            _customer.Birthdate = DateTime.Now.AddYears(-29);
             new ValidationContract<Customer>(_customer).IsLowerOrEqualsThan(x => x.Age, 18);
             new ValidationContract<Customer>(_customer).IsLowerOrEqualsThan(x => x.Height, 1.66);
-            new ValidationContract<Customer>(_customer).IsLowerOrEqualsThan(x => x.Birthdate, Convert.ToDateTime("26/11/1986"));
+            new ValidationContract<Customer>(_customer).IsLowerOrEqualsThan(x => x.Birthdate, DateTime.Now.AddYears(-30));
             Assert.AreEqual(false, _customer.IsValid());
 
             _customer = new Customer();
             _customer.Age = 17;
             _customer.Height = 1.65;
-            _customer.Birthdate = Convert.ToDateTime("26/11/1987");
+            _customer.Birthdate = DateTime.Now.AddYears(-29);
             new ValidationContract<Customer>(_customer).IsLowerOrEqualsThan(x => x.Age, 18);
             new ValidationContract<Customer>(_customer).IsLowerOrEqualsThan(x => x.Height, 1.66);
-            new ValidationContract<Customer>(_customer).IsLowerOrEqualsThan(x => x.Birthdate, Convert.ToDateTime("26/11/1988"));
+            new ValidationContract<Customer>(_customer).IsLowerOrEqualsThan(x => x.Birthdate, DateTime.Now.AddYears(-28));
             Assert.AreEqual(true, _customer.IsValid());
         }  
 
@@ -192,10 +192,10 @@ namespace FluentValidator.Tests
             _customer = new Customer();
             _customer.Age = 18;
             _customer.Height = 1.67;
-            _customer.Birthdate = Convert.ToDateTime("26/11/1987");
+            _customer.Birthdate = DateTime.Now.AddYears(-29);
             new ValidationContract<Customer>(_customer).IsBetween(x => x.Age, 17, 20);
             new ValidationContract<Customer>(_customer).IsBetween(x => x.Height, 1.66, 1.68);
-            new ValidationContract<Customer>(_customer).IsBetween(x => x.Birthdate, Convert.ToDateTime("26/11/1986"), Convert.ToDateTime("26/11/1988"));
+            new ValidationContract<Customer>(_customer).IsBetween(x => x.Birthdate, DateTime.Now.AddYears(-30), DateTime.Now.AddYears(-28));
             Assert.AreEqual(true, _customer.IsValid());
             
             _customer = new Customer();
@@ -204,7 +204,7 @@ namespace FluentValidator.Tests
             _customer.Birthdate = Convert.ToDateTime("26/11/1989");
             new ValidationContract<Customer>(_customer).IsBetween(x => x.Age, 19, 20);
             new ValidationContract<Customer>(_customer).IsBetween(x => x.Height, 1.67, 1.68);
-            new ValidationContract<Customer>(_customer).IsBetween(x => x.Birthdate, Convert.ToDateTime("26/11/1987"), Convert.ToDateTime("26/11/1988"));
+            new ValidationContract<Customer>(_customer).IsBetween(x => x.Birthdate, DateTime.Now.AddYears(-29), DateTime.Now.AddYears(-28));
             Assert.AreEqual(false, _customer.IsValid());
 
             _customer = new Customer();
@@ -213,7 +213,7 @@ namespace FluentValidator.Tests
             _customer.Birthdate = Convert.ToDateTime("26/11/1985");
             new ValidationContract<Customer>(_customer).IsBetween(x => x.Age, 19, 20);
             new ValidationContract<Customer>(_customer).IsBetween(x => x.Height, 1.67, 1.68);
-            new ValidationContract<Customer>(_customer).IsBetween(x => x.Birthdate, Convert.ToDateTime("26/11/1986"), Convert.ToDateTime("26/11/1988"));
+            new ValidationContract<Customer>(_customer).IsBetween(x => x.Birthdate, DateTime.Now.AddYears(-30), DateTime.Now.AddYears(-28));
             Assert.AreEqual(false, _customer.IsValid());            
         }
 
