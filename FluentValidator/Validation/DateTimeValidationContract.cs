@@ -35,5 +35,13 @@ namespace FluentValidator.Validation
 
             return this;
         }
+
+        public ValidationContract AreEquals(DateTime val, DateTime comparer, string property, string message)
+        {
+            if (val != comparer)
+                AddNotification(property, message);
+
+            return this;
+        }
     }
 }
