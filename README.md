@@ -2,7 +2,7 @@
 Fluent Validator is a fluent way to use Notification Pattern with your entities
 
 ## Dependencies
-.NET Standar 1.6+
+.NET Standard 1.6+
 
 ## Instalation
 This package is available through Nuget Packages: https://www.nuget.org/packages/FluentValidator
