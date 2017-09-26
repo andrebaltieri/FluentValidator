@@ -5,66 +5,100 @@ using System;
 namespace FluentValidator.Tests
 {
     [TestClass]
-    class DateTimeValidationContractTests
+    public class DateTimeValidationContractTests
     {
+        private Dummy _dummy;
+
         [TestMethod]
         [TestCategory("DateTimeValidation")]
         public void IsGreaterThan()
         {
-            var date1 = DateTime.Now;
-            var date2 = date1.AddMinutes(1);
+            _dummy = new Dummy();
+            _dummy.dateTimeProp = new DateTime(2005, 5, 15, 16, 0, 0);
 
             var wrong = new ValidationContract()
                 .Requires()
-                .IsGreaterThan(date2, date1, "DateTime", "Date 2 is greater than Date 1");
+                .IsGreaterThan(_dummy.dateTimeProp, _dummy.dateTimeProp.AddDays(1),
+                    nameof(_dummy.dateTimeProp), "Date 1 should be greater than Date 2");
 
             Assert.AreEqual(false, wrong.IsValid);
-            Assert.AreEqual(1, wrong.Notifications.Count);          
+            Assert.AreEqual(1, wrong.Notifications.Count);
+
+            var right = new ValidationContract()
+                .Requires()
+                .IsGreaterThan(_dummy.dateTimeProp, _dummy.dateTimeProp.AddMinutes(-2),
+                    nameof(_dummy.dateTimeProp), "Date 1 is not greater than Date 2");
+
+            Assert.AreEqual(true, right.IsValid);
         }
 
         [TestMethod]
         [TestCategory("DateTimeValidation")]
         public void IsGreaterOrEqualsThan()
         {
-            var date1 = DateTime.Now;
-            var date2 = date1;
+            _dummy = new Dummy();
+            _dummy.dateTimeProp = new DateTime(2017, 1, 1, 12, 0, 0);
 
             var wrong = new ValidationContract()
                 .Requires()
-                .IsGreaterOrEqualsThan(date2, date1, "DateTime", "Date 2 is greater or equals than Date 1");
+                .IsGreaterOrEqualsThan(_dummy.dateTimeProp, _dummy.dateTimeProp.AddMinutes(10),
+                    nameof(_dummy.dateTimeProp), "Date 1 should be greater or equals than Date 2");
 
             Assert.AreEqual(false, wrong.IsValid);
             Assert.AreEqual(1, wrong.Notifications.Count);
+
+            var right = new ValidationContract()
+                .Requires()
+                .IsGreaterOrEqualsThan(_dummy.dateTimeProp, _dummy.dateTimeProp,
+                    nameof(_dummy.dateTimeProp), "Date 1 is not greater or equals than Date 2");
+
+            Assert.AreEqual(true, right.IsValid);
         }
 
         [TestMethod]
         [TestCategory("DateTimeValidation")]
         public void IsLowerThan()
         {
-            var date1 = DateTime.Now;
-            var date2 = date1.AddMinutes(-1);
+            _dummy = new Dummy();
+            _dummy.dateTimeProp = new DateTime(2017, 9, 26, 15, 0, 0);
 
             var wrong = new ValidationContract()
                 .Requires()
-                .IsLowerThan(date1, date2, "DateTime", "Date 1 is lower than Date 2");
+                .IsLowerThan(_dummy.dateTimeProp, _dummy.dateTimeProp.AddSeconds(-45),
+                    nameof(_dummy.dateTimeProp), "Date 1 should be lower than Date 2");
 
             Assert.AreEqual(false, wrong.IsValid);
             Assert.AreEqual(1, wrong.Notifications.Count);
+
+            var right = new ValidationContract()
+                .Requires()
+                .IsLowerThan(_dummy.dateTimeProp, _dummy.dateTimeProp.AddDays(30),
+                    nameof(_dummy.dateTimeProp), "Date 1 is not lower than Date 2");
+
+            Assert.AreEqual(true, right.IsValid);
         }
 
         [TestMethod]
         [TestCategory("DateTimeValidation")]
         public void IsLowerOrEqualsThan()
         {
-            var date1 = DateTime.Now;
-            var date2 = date1;
+            _dummy = new Dummy();
+            _dummy.dateTimeProp = new DateTime(2005, 5, 15, 16, 0, 0);
 
             var wrong = new ValidationContract()
                 .Requires()
-                .IsLowerOrEqualsThan(date1, date2, "DateTime", "Date 1 is lower than Date 2");
+                .IsLowerOrEqualsThan(_dummy.dateTimeProp, _dummy.dateTimeProp.AddHours(-5),
+                    nameof(_dummy.dateTimeProp), "Date 1 should be lower or equals than Date 2");
 
             Assert.AreEqual(false, wrong.IsValid);
             Assert.AreEqual(1, wrong.Notifications.Count);
+
+            var right = new ValidationContract()
+                .Requires()
+                .IsLowerOrEqualsThan(_dummy.dateTimeProp, _dummy.dateTimeProp,
+                    nameof(_dummy.dateTimeProp), "Date 1 is not lower or equals than Date 2");
+
+            Assert.AreEqual(true, right.IsValid);
         }
     }
 }
