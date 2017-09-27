@@ -73,23 +73,19 @@ namespace FluentValidator.Validation
 
         public ValidationContract IsEmail(string email, string property, string message)
         {
-            if (!Regex.IsMatch(email, @"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$"))
-                AddNotification(property, message);
-
-            return this;
+            const string pattern = @"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$";
+            return Matchs(email, pattern, property, message);
         }
 
         public ValidationContract IsUrl(string url, string property, string message)
         {
-            if (!Regex.IsMatch(url, @"^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$"))
-                AddNotification(property, message);
-
-            return this;
+            const string pattern = @"^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$";
+            return Matchs(url, pattern, property, message);
         }
 
-        public ValidationContract Matchs(string text, string pattrn, string property, string message)
+        public ValidationContract Matchs(string text, string pattern, string property, string message)
         {
-            if (!Regex.IsMatch(text, pattrn))
+            if (!Regex.IsMatch(text, pattern))
                 AddNotification(property, message);
 
             return this;
