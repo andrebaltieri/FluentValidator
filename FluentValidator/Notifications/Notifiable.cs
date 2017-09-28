@@ -35,6 +35,17 @@ namespace FluentValidator
             _notifications.AddRange(notifications);
         }
 
+        public void AddNotifications(Notifiable item)
+        {
+            AddNotifications(item.Notifications);
+        }
+
+        public void AddNotifications(params Notifiable[] items)
+        {
+            foreach (var item in items)
+                AddNotifications(item);
+        }
+
         public bool IsValid => _notifications.Count == 0;
     }
 }
