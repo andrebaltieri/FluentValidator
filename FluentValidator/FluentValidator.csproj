@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
-    <Version>2.0.0</Version>
+    <Version>2.0.1</Version>
     <Authors>André Baltieri</Authors>
     <Company>balta.io</Company>
     <Description>Fluent Validator is a fluent way to use Notification Pattern with your entities</Description>
