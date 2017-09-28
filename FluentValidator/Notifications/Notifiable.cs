@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FluentValidator
 {
@@ -8,7 +9,8 @@ namespace FluentValidator
 
         protected Notifiable() { _notifications = new List<Notification>(); }
 
-        public IReadOnlyCollection<Notification> Notifications => _notifications;
+        public IReadOnlyCollection<Notification> Notifications =>
+            new List<Notification>(_notifications).Concat(GetNotificationsFromValidations()).ToList();
 
         public void AddNotification(string property, string message)
         {
@@ -35,6 +37,14 @@ namespace FluentValidator
             _notifications.AddRange(notifications);
         }
 
-        public bool IsValid => _notifications.Count == 0;
+        protected virtual IEnumerable<Notification> Validations() => null;
+
+        private IEnumerable<Notification> GetNotificationsFromValidations()
+        {
+            return Validations() ?? new List<Notification>();
+        }
+
+        public bool Invalid => _notifications.Any() || GetNotificationsFromValidations().Any();
+        public bool IsValid => !Invalid;
     }
 }
