@@ -57,7 +57,7 @@ namespace FluentValidator.Tests
 
         [TestMethod]
         [TestCategory("Notifiable")]
-        public void DontConcatNotifications()
+        public void DontRepeatNotifications()
         {
             Invoice invoice = new Invoice(0, DateTime.Today, 100, new Address(string.Empty));
 
