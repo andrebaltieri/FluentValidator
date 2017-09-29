@@ -1,3 +1,4 @@
+using System.Linq;
 using FluentValidator.Validation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -42,6 +43,8 @@ namespace FluentValidator.Tests
             Assert.AreEqual(false, wrong.IsValid);
         }
 
+
+
         [TestMethod]
         [TestCategory("StringValidation")]
         public void MinLen()
@@ -58,6 +61,19 @@ namespace FluentValidator.Tests
                 .HasMinLen("Some Valid String", 5, "string", "String len is less than permited");
 
             Assert.AreEqual(true, right.IsValid);
+        }
+
+        [TestMethod]
+        [TestCategory("StringValidation")]
+        public void MinLenWithParameters()
+        {
+            var wrong = new ValidationContract()
+                .Requires()
+                .HasMinLen("null", 5,"string", "String must have at least {1} characters.");
+
+            var notification = wrong.Notifications.First();
+
+            Assert.AreEqual("String must have at least 5 characters.", notification.Message);
         }
 
         [TestMethod]
@@ -80,6 +96,17 @@ namespace FluentValidator.Tests
 
         [TestMethod]
         [TestCategory("StringValidation")]
+        public void MaxLenWithParameters()
+        {
+            var x = new ValidationContract()
+                .Requires()
+                .HasMaxLen("null", 3, "string", "String len is more than {1}");
+
+            Assert.AreEqual("String len is more than 3", x.Notifications.First().Message);
+        }
+
+        [TestMethod]
+        [TestCategory("StringValidation")]
         public void Len()
         {
             var x = new ValidationContract()
@@ -94,6 +121,19 @@ namespace FluentValidator.Tests
                 .HasLen("Some1", 5, "string", "String len is less than permited");
 
             Assert.AreEqual(true, right.IsValid);
+        }
+
+        [TestMethod]
+        [TestCategory("StringValidation")]
+        public void LenWithParameters()
+        {
+            var x = new ValidationContract()
+                .Requires()
+                .HasLen("null", 3, "string", "{0} len is more than {1}")
+                .Notifications
+                .First();
+
+            Assert.AreEqual("null len is more than 3", x.Message);
         }
 
         [TestMethod]
@@ -116,6 +156,17 @@ namespace FluentValidator.Tests
 
         [TestMethod]
         [TestCategory("StringValidation")]
+        public void ContainsWithParameters()
+        {
+            var x = new ValidationContract()
+                .Requires()
+                .Contains("some text here", "banana", "string", "{0} does not contains {1}");
+
+            Assert.AreEqual("some text here does not contains banana", x.Notifications.First().Message);
+        }
+
+        [TestMethod]
+        [TestCategory("StringValidation")]
         public void Email()
         {
             var wrong = new ValidationContract()
@@ -130,6 +181,19 @@ namespace FluentValidator.Tests
                 .IsEmail("andrebaltieri@gmail.com", "string", "Invalid E-mail");
 
             Assert.AreEqual(true, right.IsValid);
+        }
+
+        [TestMethod]
+        public void EmailWithParameters()
+        {
+            var wrong = new ValidationContract()
+                .Requires()
+                .IsEmail("wrongemail", "string", "Email should match the pattern {0}");
+
+            var message = wrong.Notifications.First().Message;
+            var pattern = @"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$";
+
+            Assert.AreEqual($"Email should match the pattern {pattern}", message);
         }
 
         [TestMethod]
@@ -151,6 +215,7 @@ namespace FluentValidator.Tests
 
             Assert.AreEqual(true, right.IsValid);
         }
+        
 
         [TestMethod]
         [TestCategory("StringValidation")]

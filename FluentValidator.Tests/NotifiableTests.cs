@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FluentValidator.Tests
 {
@@ -9,15 +11,40 @@ namespace FluentValidator.Tests
         [TestCategory("Notifiable")]
         public void AddNotificationForOneNotifiable()
         {
-            var name =new Name();
+            var name = new Name();
             var cus = new Customer();
 
             AddNotifications(name);
             AddNotifications(cus);
 
             Assert.AreEqual(false, IsValid);
-            Assert.AreEqual(2, Notifications.Count);            
+            Assert.AreEqual(2, Notifications.Count);
         }
+
+        [TestMethod]
+        [TestCategory("Notifiable")]
+        public void AddNotificationForOneNotifiableWithParameters()
+        {
+            var cus = new Customer(anotherParam: "with message");
+
+            AddNotifications(cus);
+            var notification = cus.Notifications.First();
+
+            Assert.AreEqual("Testing with message", notification.Message);
+        }
+
+        [TestMethod]
+        [TestCategory("Notifiable")]
+        public void AddNotificationWithNullParameter()
+        {
+            var cus = new Customer(anotherParam: null);
+
+            AddNotifications(cus);
+            var notification = cus.Notifications.First();
+
+            Assert.AreEqual("Testing ", notification.Message);
+        }
+
 
         [TestMethod]
         [TestCategory("Notifiable")]
@@ -35,9 +62,9 @@ namespace FluentValidator.Tests
 
     public class Customer : Notifiable
     {
-        public Customer()
+        public Customer(string message = "Testing", string anotherParam = null)
         {
-            AddNotification("Test", "Testing");
+            AddNotification("Test", $"{message} {{0}}", anotherParam);
         }
 
         public Name Name { get; set; }
@@ -47,7 +74,7 @@ namespace FluentValidator.Tests
     {
         public Name()
         {
-            AddNotification("Test", "Testing");
+            AddNotification("Test", "Testing", FirstName, LastName);
         }
 
         public string FirstName { get; set; }

@@ -8,7 +8,7 @@ namespace FluentValidator.Validation
         {
             // TODO: StringComparison.OrdinalIgnoreCase not suported yet
             if (val.ToString() != comparer.ToString())
-                AddNotification(property, message);
+                AddNotification(property, message, val, comparer);
 
             return this;
         }
@@ -17,7 +17,7 @@ namespace FluentValidator.Validation
         {
             // TODO: StringComparison.OrdinalIgnoreCase not suported yet
             if (val.ToString() == comparer.ToString())
-                AddNotification(property, message);
+                AddNotification(property, message, val, comparer);
 
             return this;
         }
