@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace FluentValidator
@@ -13,6 +14,14 @@ namespace FluentValidator
         public void AddNotification(string property, string message)
         {
             _notifications.Add(new Notification(property, message));
+        }
+
+        public void AddNotification(string property, string message, params object[] parameters)
+        {
+            parameters = parameters ?? new object[] { };
+
+            var formattedMessage = string.Format(message, parameters);
+            AddNotification(property, formattedMessage);
         }
 
         public void AddNotification(Notification notification)
@@ -42,7 +51,7 @@ namespace FluentValidator
 
         public void AddNotifications(params Notifiable[] items)
         {
-            foreach (var item in items)
+            foreach(var item in items)
                 AddNotifications(item);
         }
 

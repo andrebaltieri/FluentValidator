@@ -7,7 +7,7 @@ namespace FluentValidator.Validation
         public ValidationContract IsGreaterThan(DateTime val, DateTime comparer, string property, string message)
         {
             if (val <= comparer)
-                AddNotification(property, message);
+                AddNotification(property, message, val, comparer);
 
             return this;
         }
@@ -15,7 +15,7 @@ namespace FluentValidator.Validation
         public ValidationContract IsGreaterOrEqualsThan(DateTime val, DateTime comparer, string property, string message)
         {
             if (val < comparer)
-                AddNotification(property, message);
+                AddNotification(property, message, val, comparer);
 
             return this;
         }
@@ -23,7 +23,7 @@ namespace FluentValidator.Validation
         public ValidationContract IsLowerThan(DateTime val, DateTime comparer, string property, string message)
         {
             if (val >= comparer)
-                AddNotification(property, message);
+                AddNotification(property, message, val, comparer);
 
             return this;
         }
@@ -31,7 +31,7 @@ namespace FluentValidator.Validation
         public ValidationContract IsLowerOrEqualsThan(DateTime val, DateTime comparer, string property, string message)
         {
             if (val > comparer)
-                AddNotification(property, message);
+                AddNotification(property, message, val, comparer);
 
             return this;
         }
