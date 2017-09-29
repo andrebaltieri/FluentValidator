@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentValidator", "FluentValidator\FluentValidator.csproj", "{BF5686E0-14F3-4A6A-9C0D-8B5B7AE1944C}"
 EndProject
