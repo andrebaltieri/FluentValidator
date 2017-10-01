@@ -109,6 +109,27 @@ namespace FluentValidator.Tests
                 .IsLowerOrEqualsThan(_dummy.dateTimeProp, _dummy.dateTimeProp.AddMinutes(1), nameof(_dummy.dateTimeProp), "Date 1 is not lower or equals than Date 2");
 
             Assert.AreEqual(true, right.IsValid);
-        }       
+        }
+
+        [TestMethod]
+        [TestCategory("DateTimeValidation")]
+        public void IsBetween()
+        {            
+            var from = new DateTime(2017, 10, 1);
+            var to = from.AddDays(30);
+            
+            var wrong = new ValidationContract()
+                .Requires()
+                .IsBetween(new DateTime(2017, 10, 1), from, to, "datetime", "The date must be between 01/10/2017 and 31/10/2017");
+
+            Assert.AreEqual(false, wrong.IsValid);
+            Assert.AreEqual(1, wrong.Notifications.Count);
+
+            var right = new ValidationContract()
+                .Requires()
+                .IsBetween(new DateTime(2017, 10, 30), from, to, "datetime", "The date is between 01/10/2017 and 31/10/2017");
+
+            Assert.AreEqual(true, right.IsValid);
+        }
     }
 }

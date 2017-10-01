@@ -35,5 +35,14 @@ namespace FluentValidator.Validation
 
             return this;
         }
+
+        public ValidationContract IsBetween(DateTime val, DateTime from, DateTime to, string property, string message)
+        {
+            if (!(val > from && val < to))
+                AddNotification(property, message);
+
+            return this;
+        }
+
     }
 }
