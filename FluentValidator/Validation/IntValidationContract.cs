@@ -205,5 +205,15 @@
             return this;
         }
         #endregion
+
+        #region Between      
+        public ValidationContract IsBetween(int val, int from, int to, string property, string message)
+        {
+            if (!(val > from && val < to))
+                AddNotification(property, message);
+
+            return this;
+        }
+        #endregion
     }
 }

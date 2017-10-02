@@ -89,6 +89,32 @@ namespace FluentValidator.Tests
                 .IsGreaterThan(v2, v1, "decimal", "V1 is not greater than v2");
 
             Assert.AreEqual(true, right.IsValid);
-        }
+        }       
+
+        [TestMethod]
+        [TestCategory("DecimalValidation")]
+        public void IsBetweenDecimal()
+        {
+            decimal value = -1.01M;
+            decimal from = 1.01M;
+            decimal to = 10;
+
+            var wrong = new ValidationContract()
+                .Requires()
+                .IsBetween(value, from, to, "decimal", "The value -1.01 must be between 1.01 and 10");
+
+            Assert.AreEqual(false, wrong.IsValid);
+            Assert.AreEqual(1, wrong.Notifications.Count);
+
+            value = 1.015M;
+            from = 1.01M;
+            to = 1.02M;
+
+            var right = new ValidationContract()
+                .Requires()
+                .IsBetween(value, from, to, "decimal", "The value 1.015 is between 1.01 and 1.02");
+
+            Assert.AreEqual(true, right.IsValid);
+        }        
     }
 }
