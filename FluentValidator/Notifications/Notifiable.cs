@@ -56,6 +56,6 @@ namespace FluentValidator
         }
 
         public bool Invalid => _notifications.Any() || GetNotificationsFromValidations().Any();
-        public bool IsValid => !Invalid;
+        public bool Valid => !Invalid;
     }
 }
