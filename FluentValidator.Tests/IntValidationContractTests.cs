@@ -18,7 +18,7 @@ namespace FluentValidator.Tests
                 .Requires()
                 .IsBetween(value, from, to, "int", "The value 11 must be between 1 and 10");
 
-            Assert.AreEqual(false, wrong.IsValid);
+            Assert.AreEqual(false, wrong.Valid);
             Assert.AreEqual(1, wrong.Notifications.Count);
 
             value = 5;
@@ -27,9 +27,9 @@ namespace FluentValidator.Tests
 
             var right = new ValidationContract()
                 .Requires()
-                .IsBetween(value, from, to, "int", "The value 5 is between 1 and 10");
+                .IsBetween(5, 1, 10, "int", "The value 5 is between 1 and 10");
 
-            Assert.AreEqual(true, right.IsValid);
+            Assert.AreEqual(true, right.Valid);
         }
     }
 }

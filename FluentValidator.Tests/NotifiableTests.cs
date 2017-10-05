@@ -18,7 +18,7 @@ namespace FluentValidator.Tests
             AddNotifications(name);
             AddNotifications(cus);
 
-            Assert.AreEqual(false, IsValid);
+            Assert.AreEqual(false, Valid);
             Assert.AreEqual(2, Notifications.Count);            
         }
 
@@ -31,7 +31,7 @@ namespace FluentValidator.Tests
 
             AddNotifications(name, customer);
 
-            Assert.AreEqual(false, IsValid);
+            Assert.AreEqual(false, Valid);
             Assert.AreEqual(2, Notifications.Count);
         }
 
@@ -41,7 +41,7 @@ namespace FluentValidator.Tests
         {
             Invoice invoice = new Invoice(0, DateTime.Today, 100, new Address("Name"));
 
-            Assert.IsFalse(invoice.IsValid);
+            Assert.IsFalse(invoice.Valid);
             Assert.AreEqual(1, invoice.Notifications.Count);
         }
 
@@ -51,7 +51,7 @@ namespace FluentValidator.Tests
         {
             Invoice invoice = new Invoice(0, DateTime.Today, 100, new Address(string.Empty));
 
-            Assert.IsFalse(invoice.IsValid);
+            Assert.IsFalse(invoice.Valid);
             Assert.AreEqual(2, invoice.Notifications.Count);
         }
 
@@ -61,8 +61,8 @@ namespace FluentValidator.Tests
         {
             Invoice invoice = new Invoice(0, DateTime.Today, 100, new Address(string.Empty));
 
-            Assert.IsFalse(invoice.IsValid);
-            Assert.IsFalse(invoice.IsValid);
+            Assert.IsFalse(invoice.Valid);
+            Assert.IsFalse(invoice.Valid);
 
             Assert.AreEqual(2, invoice.Notifications.Count);
         }
