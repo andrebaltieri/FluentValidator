@@ -85,7 +85,7 @@ namespace FluentValidator.Validation
 
         public ValidationContract Matchs(string text, string pattern, string property, string message)
         {
-            if (!Regex.IsMatch(text, pattern))
+            if (!Regex.IsMatch(text ?? "", pattern))
                 AddNotification(property, message);
 
             return this;
