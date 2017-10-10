@@ -15,13 +15,13 @@ namespace FluentValidator.Tests
                 .IsNotNullOrEmpty(null, "string", "String is Null")
                 .IsNotNullOrEmpty("", "string", "String is Empty");
 
-            Assert.AreEqual(false, wrong.IsValid);
+            Assert.AreEqual(false, wrong.Valid);
             Assert.AreEqual(2, wrong.Notifications.Count);
 
             var right = new ValidationContract()
                 .Requires()
                 .IsNotNullOrEmpty("Some valid string", "string", "String is Null");
-            Assert.AreEqual(true, right.IsValid);
+            Assert.AreEqual(true, right.Valid);
         }
 
         [TestMethod]
@@ -33,13 +33,13 @@ namespace FluentValidator.Tests
                 .IsNullOrEmpty(null, "string", "String is Null")
                 .IsNullOrEmpty("", "string", "String is Empty");
 
-            Assert.AreEqual(true, right.IsValid);
+            Assert.AreEqual(true, right.Valid);
             Assert.AreEqual(0, right.Notifications.Count);
 
             var wrong = new ValidationContract()
                 .Requires()
                 .IsNullOrEmpty("Some valid string", "string", "String is Null");
-            Assert.AreEqual(false, wrong.IsValid);
+            Assert.AreEqual(false, wrong.Valid);
         }
 
         [TestMethod]
@@ -50,14 +50,14 @@ namespace FluentValidator.Tests
                 .Requires()
                 .HasMinLen("null", 5, "string", "String len is less than permited");
 
-            Assert.AreEqual(false, wrong.IsValid);
+            Assert.AreEqual(false, wrong.Valid);
             Assert.AreEqual(1, wrong.Notifications.Count);
 
             var right = new ValidationContract()
                 .Requires()
                 .HasMinLen("Some Valid String", 5, "string", "String len is less than permited");
 
-            Assert.AreEqual(true, right.IsValid);
+            Assert.AreEqual(true, right.Valid);
         }
 
         [TestMethod]
@@ -68,14 +68,14 @@ namespace FluentValidator.Tests
                 .Requires()
                 .HasMaxLen("null", 3, "string", "String len is more than permited");
 
-            Assert.AreEqual(false, x.IsValid);
+            Assert.AreEqual(false, x.Valid);
             Assert.AreEqual(1, x.Notifications.Count);
 
             var right = new ValidationContract()
                 .Requires()
                 .HasMaxLen("Some", 5, "string", "String len is less than permited");
 
-            Assert.AreEqual(true, right.IsValid);
+            Assert.AreEqual(true, right.Valid);
         }
 
         [TestMethod]
@@ -86,14 +86,14 @@ namespace FluentValidator.Tests
                 .Requires()
                 .HasLen("null", 3, "string", "String len is more than permited");
 
-            Assert.AreEqual(false, x.IsValid);
+            Assert.AreEqual(false, x.Valid);
             Assert.AreEqual(1, x.Notifications.Count);
 
             var right = new ValidationContract()
                 .Requires()
                 .HasLen("Some1", 5, "string", "String len is less than permited");
 
-            Assert.AreEqual(true, right.IsValid);
+            Assert.AreEqual(true, right.Valid);
         }
 
         [TestMethod]
@@ -104,14 +104,14 @@ namespace FluentValidator.Tests
                 .Requires()
                 .Contains("some text here", "banana", "string", "String does not contains banana");
 
-            Assert.AreEqual(false, x.IsValid);
+            Assert.AreEqual(false, x.Valid);
             Assert.AreEqual(1, x.Notifications.Count);
 
             var right = new ValidationContract()
                 .Requires()
                 .Contains("some banana here", "banana", "string", "String does not contains banana");
 
-            Assert.AreEqual(true, right.IsValid);
+            Assert.AreEqual(true, right.Valid);
         }
 
         [TestMethod]
@@ -122,14 +122,14 @@ namespace FluentValidator.Tests
                 .Requires()
                 .IsEmail("wrongemail", "string", "Invalid E-mail");
 
-            Assert.AreEqual(false, wrong.IsValid);
+            Assert.AreEqual(false, wrong.Valid);
             Assert.AreEqual(1, wrong.Notifications.Count);
 
             var right = new ValidationContract()
                 .Requires()
                 .IsEmail("andrebaltieri@gmail.com", "string", "Invalid E-mail");
 
-            Assert.AreEqual(true, right.IsValid);
+            Assert.AreEqual(true, right.Valid);
         }
 
         [TestMethod]
@@ -140,7 +140,7 @@ namespace FluentValidator.Tests
                 .Requires()
                 .IsUrl("wrongurl", "string", "Invalid URL");
 
-            Assert.AreEqual(false, wrong.IsValid);
+            Assert.AreEqual(false, wrong.Valid);
             Assert.AreEqual(1, wrong.Notifications.Count);
 
             var right = new ValidationContract()
@@ -149,7 +149,7 @@ namespace FluentValidator.Tests
                 .IsUrl("http://gmail.com", "string", "Invalid URL")
                 .IsUrl("http://balta.io/", "string", "Invalid URL");
 
-            Assert.AreEqual(true, right.IsValid);
+            Assert.AreEqual(true, right.Valid);
         }
 
         [TestMethod]
@@ -160,14 +160,14 @@ namespace FluentValidator.Tests
                 .Requires()
                 .Matchs("wrongurl", @"^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$", "string", "Invalid URL");
 
-            Assert.AreEqual(false, wrong.IsValid);
+            Assert.AreEqual(false, wrong.Valid);
             Assert.AreEqual(1, wrong.Notifications.Count);
 
             var right = new ValidationContract()
                 .Requires()
                 .Matchs("http://gmail.com", @"^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$", "string", "Invalid URL");
 
-            Assert.AreEqual(true, right.IsValid);
+            Assert.AreEqual(true, right.Valid);
         }
     }
 }

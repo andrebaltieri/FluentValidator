@@ -18,7 +18,7 @@ namespace FluentValidator.Tests
                 .Requires()
                 .IsBetween(value, from, to, "double", "The value 49.999 must be between 50.000 and 59.999");
 
-            Assert.AreEqual(false, wrong.IsValid);
+            Assert.AreEqual(false, wrong.Valid);
             Assert.AreEqual(1, wrong.Notifications.Count);
 
             value = 1250.01;
@@ -29,7 +29,7 @@ namespace FluentValidator.Tests
                 .Requires()
                 .IsBetween(value, from, to, "double", "The value 1250.01 is between 1000.01 and 1299.99");
 
-            Assert.AreEqual(true, right.IsValid);
+            Assert.AreEqual(true, right.Valid);
         }      
     }
 }

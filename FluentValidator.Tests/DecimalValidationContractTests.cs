@@ -17,14 +17,14 @@ namespace FluentValidator.Tests
                 .IsGreaterThan(v1, v2, "decimal", "V1 is not greater than v2")
                 .IsGreaterThan(1, 1M, "decimal", "V1 is not greater than v2"); // 1 is not greater than 1 :)
 
-            Assert.AreEqual(false, wrong.IsValid);
+            Assert.AreEqual(false, wrong.Valid);
             Assert.AreEqual(2, wrong.Notifications.Count);
 
             var right = new ValidationContract()
                 .Requires()
                 .IsGreaterThan(v2, v1, "decimal", "V1 is not greater than v2");
 
-            Assert.AreEqual(true, right.IsValid);
+            Assert.AreEqual(true, right.Valid);
         }
 
         [TestMethod]
@@ -37,7 +37,7 @@ namespace FluentValidator.Tests
                 .Requires()
                 .IsGreaterThan(v1, v2, "decimal", "V1 is not greater than v2");
 
-            Assert.AreEqual(false, wrong.IsValid);
+            Assert.AreEqual(false, wrong.Valid);
             Assert.AreEqual(1, wrong.Notifications.Count);
 
             v1 = 10;
@@ -46,7 +46,7 @@ namespace FluentValidator.Tests
                 .Requires()
                 .IsGreaterThan(v1, v2, "decimal", "V1 is not greater than v2");
 
-            Assert.AreEqual(true, right.IsValid);
+            Assert.AreEqual(true, right.Valid);
         }
 
         [TestMethod]
@@ -59,7 +59,7 @@ namespace FluentValidator.Tests
                 .Requires()
                 .IsGreaterThan(v1, v2, "decimal", "V1 is not greater than v2");
 
-            Assert.AreEqual(false, wrong.IsValid);
+            Assert.AreEqual(false, wrong.Valid);
             Assert.AreEqual(1, wrong.Notifications.Count);
 
             v1 = 10;
@@ -68,7 +68,7 @@ namespace FluentValidator.Tests
                 .Requires()
                 .IsGreaterThan(v1, v2, "decimal", "V1 is not greater than v2");
 
-            Assert.AreEqual(true, right.IsValid);
+            Assert.AreEqual(true, right.Valid);
         }
 
         [TestMethod]
@@ -81,14 +81,14 @@ namespace FluentValidator.Tests
                 .Requires()
                 .IsGreaterThan(v1, v2, "decimal", "V1 is not greater than v2");
 
-            Assert.AreEqual(false, wrong.IsValid);
+            Assert.AreEqual(false, wrong.Valid);
             Assert.AreEqual(1, wrong.Notifications.Count);
 
             var right = new ValidationContract()
                 .Requires()
                 .IsGreaterThan(v2, v1, "decimal", "V1 is not greater than v2");
 
-            Assert.AreEqual(true, right.IsValid);
+            Assert.AreEqual(true, right.Valid);
         }       
 
         [TestMethod]
@@ -103,7 +103,7 @@ namespace FluentValidator.Tests
                 .Requires()
                 .IsBetween(value, from, to, "decimal", "The value -1.01 must be between 1.01 and 10");
 
-            Assert.AreEqual(false, wrong.IsValid);
+            Assert.AreEqual(false, wrong.Valid);
             Assert.AreEqual(1, wrong.Notifications.Count);
 
             value = 1.015M;
@@ -114,7 +114,7 @@ namespace FluentValidator.Tests
                 .Requires()
                 .IsBetween(value, from, to, "decimal", "The value 1.015 is between 1.01 and 1.02");
 
-            Assert.AreEqual(true, right.IsValid);
+            Assert.AreEqual(true, right.Valid);
         }        
     }
 }

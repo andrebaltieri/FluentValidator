@@ -14,13 +14,13 @@ namespace FluentValidator.Tests
                 .Requires()
                 .IsTrue(false, "bool", "Bool is false");
 
-            Assert.AreEqual(false, wrong.IsValid);
+            Assert.AreEqual(false, wrong.Valid);
             Assert.AreEqual(1, wrong.Notifications.Count);
 
             var right = new ValidationContract()
                 .Requires()
                 .IsTrue(true, "bool", "Bool is false");
-            Assert.AreEqual(true, right.IsValid);
+            Assert.AreEqual(true, right.Valid);
         }
 
         [TestMethod]
@@ -31,13 +31,13 @@ namespace FluentValidator.Tests
                 .Requires()
                 .IsFalse(true, "bool", "Bool is true");
 
-            Assert.AreEqual(false, wrong.IsValid);
+            Assert.AreEqual(false, wrong.Valid);
             Assert.AreEqual(1, wrong.Notifications.Count);
 
             var right = new ValidationContract()
                 .Requires()
                 .IsFalse(false, "bool", "Bool is true");
-            Assert.AreEqual(true, right.IsValid);
+            Assert.AreEqual(true, right.Valid);
         }
     }
 }
