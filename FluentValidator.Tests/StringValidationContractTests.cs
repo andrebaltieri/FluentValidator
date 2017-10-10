@@ -134,6 +134,17 @@ namespace FluentValidator.Tests
 
         [TestMethod]
         [TestCategory("StringValidation")]
+        public void EmailOrEmpty()
+        {
+            var right = new ValidationContract()
+                .Requires()
+                .IsEmailOrEmpty("", "string", "Invalid E-mail");
+
+            Assert.AreEqual(true, right.Valid);
+        }
+
+        [TestMethod]
+        [TestCategory("StringValidation")]
         public void Url()
         {
             var wrong = new ValidationContract()
@@ -148,6 +159,17 @@ namespace FluentValidator.Tests
                 .IsUrl("https://gmail.com", "string", "Invalid URL")
                 .IsUrl("http://gmail.com", "string", "Invalid URL")
                 .IsUrl("http://balta.io/", "string", "Invalid URL");
+
+            Assert.AreEqual(true, right.Valid);
+        }
+
+        [TestMethod]
+        [TestCategory("StringValidation")]
+        public void UrlOrEmpty()
+        {
+            var right = new ValidationContract()
+                .Requires()
+                .IsUrlOrEmpty("", "string", "Invalid URL");
 
             Assert.AreEqual(true, right.Valid);
         }

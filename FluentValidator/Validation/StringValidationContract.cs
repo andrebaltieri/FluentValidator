@@ -77,10 +77,26 @@ namespace FluentValidator.Validation
             return Matchs(email, pattern, property, message);
         }
 
+        public ValidationContract IsEmailOrEmpty(string email, string property, string message)
+        {
+            if (string.IsNullOrEmpty(email))
+                return this;
+
+            return IsEmail(email, property, message);
+        }
+
         public ValidationContract IsUrl(string url, string property, string message)
         {
             const string pattern = @"^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$";
             return Matchs(url, pattern, property, message);
+        }
+
+        public ValidationContract IsUrlOrEmpty(string url, string property, string message)
+        {
+            if (string.IsNullOrEmpty(url))
+                return this;
+
+            return IsUrl(url, property, message);
         }
 
         public ValidationContract Matchs(string text, string pattern, string property, string message)
