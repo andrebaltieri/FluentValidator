@@ -18,11 +18,27 @@ namespace FluentValidator.Validation
                 AddNotification(property, message);
 
             return this;
+        }        
+        
+        public ValidationContract IsNotNullOrWhiteSpace(string val, string property, string message)
+        {
+            if (string.IsNullOrWhiteSpace(val))
+                AddNotification(property, message);
+
+            return this;
+        }
+
+        public ValidationContract IsNullOrWhiteSpace(string val, string property, string message)
+        {
+            if (!string.IsNullOrWhiteSpace(val))
+                AddNotification(property, message);
+
+            return this;
         }
 
         public ValidationContract HasMinLen(string val, int min, string property, string message)
         {
-            if (val.Length < min)
+            if ((val ?? "").Length < min)
                 AddNotification(property, message);
 
             return this;
@@ -30,7 +46,7 @@ namespace FluentValidator.Validation
 
         public ValidationContract HasMaxLen(string val, int max, string property, string message)
         {
-            if (val.Length > max)
+            if ((val ?? "").Length > max)
                 AddNotification(property, message);
 
             return this;
@@ -38,7 +54,7 @@ namespace FluentValidator.Validation
 
         public ValidationContract HasLen(string val, int len, string property, string message)
         {
-            if (val.Length != len)
+            if ((val ?? "").Length != len)
                 AddNotification(property, message);
 
             return this;
@@ -47,7 +63,7 @@ namespace FluentValidator.Validation
         public ValidationContract Contains(string val, string text, string property, string message)
         {
             // TODO: StringComparison.OrdinalIgnoreCase not suported yet
-            if (!val.Contains(text))
+            if (!(val ?? "").Contains(text))
                 AddNotification(property, message);
 
             return this;
