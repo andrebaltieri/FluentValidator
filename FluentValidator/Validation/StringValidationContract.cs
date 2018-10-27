@@ -18,8 +18,8 @@ namespace FluentValidator.Validation
                 AddNotification(property, message);
 
             return this;
-        }        
-        
+        }
+
         public ValidationContract IsNotNullOrWhiteSpace(string val, string property, string message)
         {
             if (string.IsNullOrWhiteSpace(val))
@@ -118,6 +118,14 @@ namespace FluentValidator.Validation
         public ValidationContract Matchs(string text, string pattern, string property, string message)
         {
             if (!Regex.IsMatch(text ?? "", pattern))
+                AddNotification(property, message);
+
+            return this;
+        }
+
+        public ValidationContract HasNumber(string val, string property, string message)
+        {
+            if (Regex.IsMatch(val ?? "", @"\d+"))
                 AddNotification(property, message);
 
             return this;

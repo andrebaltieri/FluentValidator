@@ -191,5 +191,23 @@ namespace FluentValidator.Tests
 
             Assert.AreEqual(true, right.Valid);
         }
+
+        [TestMethod]
+        [TestCategory("StringValidation")]
+        public void HasNumber()
+        {
+            var wrong = new ValidationContract()
+                .Requires()
+                .HasNumber("wrong", "string", "String dont has number");
+
+            Assert.AreEqual(false, wrong.Valid);
+            Assert.AreEqual(1, wrong.Notifications.Count);
+
+            var right = new ValidationContract()
+                .Requires()
+                .HasNumber("correct1", "string", "String has number");
+
+            Assert.AreEqual(true, right.Valid);
+        }
     }
 }
